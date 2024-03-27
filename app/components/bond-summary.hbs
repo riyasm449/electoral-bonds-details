@@ -1,0 +1,23 @@
+<header>Summary</header>
+<table>
+  <thead>
+    <tr>
+      <th>Party Name</th>
+      <th>Total Amount</th>
+      <th>Total Companies</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.paginatedPartyTotals as |partyTotal|}}
+      <tr>
+        <td><a href="#" {{action "selectParty" partyTotal.partyName}}>{{partyTotal.partyName}}</a></td>
+        <td>{{partyTotal.totalAmount}}</td>
+        <td>{{partyTotal.totalCompanies}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+{{#each this.pageNumbers as |pageNumber|}}
+  <button type="button" {{action "changePage" pageNumber}}>{{pageNumber}}</button>
+{{/each}}

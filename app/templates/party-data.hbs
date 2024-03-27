@@ -1,0 +1,29 @@
+{{outlet}}
+<header>Party-wise Data</header>
+<EmberTable class="ember-table" as |t|>
+    <t.head @columns={{this.model.columns}} @sorts={{this.model.sorts}} @onUpdateSorts={{action (mut this.model.sorts)}}
+        @widthConstraint='eq-container' class="ember-table-header" as |h|>
+        <h.row as |r|>
+            <r.cell class="ember-table-header-cell" as |column columnMeta|>
+                {{column.name}}
+            </r.cell>
+        </h.row>
+    </t.head>
+    {{#if this.model.parties}}
+        <t.body class="ember-table-body" @rows={{this.model.parties}} as |b|>
+            <b.row class="ember-table-row" as |r|>
+                <r.cell class="ember-table-body-cell" as |value index|>
+                    {{#if (eq index.name "Name")}}
+                        <a href="/details?type=party&name={{value}}" class="name-card">{{value}}</a>
+                    {{else if (eq index.name "Total Amount")}}
+                        {{format-number value style="decimal"}}
+                    {{else}}
+                        {{value}}
+                    {{/if}}
+                </r.cell>
+            </b.row>
+        </t.body>
+    {{else}}
+        No data
+    {{/if}}
+</EmberTable>
